@@ -1,44 +1,64 @@
 package com.DoomReplacer;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup("example")
+@ConfigGroup(DoomReplacerConfig.GROUP)
 public interface DoomReplacerConfig extends Config {
 
-	String GROUP_NAME = "doomreplacer";
+	// Default
+	static final int DEFAULT_MELEE = 3378;
 
-	@ConfigSection(name = "General", description = "General settings for the plugin", position = 1, closedByDefault = true)
-	String GENERAL_SECTION = "generalSection";
+	static final int ZEBAK_RANGE_PROJECTILE = 2178;
+	static final int ZEBAK_MAGE_PROJECTILE = 2176;
 
-	@ConfigItem(keyName = "doomProjectileTheme", name = "Projectile Theme", description = "Modifies the Projectile to appear in a specific theme to assist with colourblind users", position = 1, section = GENERAL_SECTION)
-	default DoomProjectileTheme doomProjectileTheme() {
-		return DoomProjectileTheme.DEFAULT;
+	// Inferno
+	static final int INFERNO_RANGE = 1380;
+	static final int INFERNO_MAGE = 1380;
+	static final int INFERNO_MELEE = DEFAULT_MELEE;
+
+	// CoX
+	static final int COX_RANGE = 1343;
+	static final int COX_MAGE = 1341;
+	static final int COX_MELEE = 1345;
+
+	// ToB
+	static final int TOB_RANGE = 1607;
+	static final int TOB_MAGE = 1606;
+	static final int TOB_MELEE = DEFAULT_MELEE;
+
+	// ToA
+	static final int TOA_RANGE = 2241;
+	static final int TOA_MAGE = 2224;
+	static final int TOA_MELEE = 2204;
+
+	String GROUP = "doom-projectiles";
+
+	@Getter
+	@AllArgsConstructor
+	enum Style {
+		Inferno(INFERNO_RANGE, INFERNO_MAGE, INFERNO_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE),
+		CoX(COX_RANGE, COX_MAGE, COX_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE),
+		ToB(TOB_RANGE, TOB_MAGE, TOB_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE),
+		ToA(TOA_RANGE, TOA_MAGE, TOA_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE);
+
+		private final int range;
+		private final int magic;
+		private final int melee;
+		private final int rangerock;
+		private final int magerock;
 	}
 
-	@ConfigItem(name = "Themed Rock", keyName = "themedRock", description = "Enables the themed rock for the Doom of Mokhaiotl", position = 2, section = GENERAL_SECTION)
+	@ConfigItem(keyName = "style", name = "Projectile Style", description = "The type of projectile to replace Dooms projectiles with", position = 1)
+	default Style style() {
+		return Style.ToA;
+	}
+
+	@ConfigItem(name = "Themed Rock", keyName = "themedRock", description = "Replace boulders with Zebak alternatives", position = 2)
 	default boolean themedRock() {
 		return true;
-	}
-
-}
-
-enum DoomProjectileTheme {
-	DEFAULT("Default"),
-	RED("Red"),
-	GREEN("Green"),
-	BLUE("Blue");
-
-	private final String name;
-
-	DoomProjectileTheme(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return name;
 	}
 }
