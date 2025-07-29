@@ -36,19 +36,32 @@ public class DoomReplacerPlugin extends Plugin {
 
 	@Subscribe
 	public void onProjectileMoved(ProjectileMoved projectileMoved) {
-		Projectile projectile = projectileMoved.getProjectile();
-		if (projectile.getId() == RANGE_PROJECTILE) {
-			replaceProjectile(projectile, config.style().getRange());
-		} else if (projectile.getId() == MAGIC_PROJECTILE) {
-			replaceProjectile(projectile, config.style().getMagic());
-		} else if (projectile.getId() == MELEE_PROJECTILE && config.style().getMelee() != projectile.getId()) {
-			replaceProjectile(projectile, config.style().getMelee());
-		}
 
-		if (projectile.getId() == RANGE_ROCK_PROJECTILE && config.themedRock()) {
-			replaceProjectile(projectile, config.style().getRangerock());
-		} else if (projectile.getId() == MAGE_ROCK_PROJECTILE && config.themedRock()) {
-			replaceProjectile(projectile, config.style().getMagerock());
+		Projectile projectile = projectileMoved.getProjectile();
+		switch (projectile.getId()) {
+			case RANGE_PROJECTILE:
+				replaceProjectile(projectile, config.style().getRange());
+				break;
+			case MAGIC_PROJECTILE:
+				replaceProjectile(projectile, config.style().getMagic());
+				break;
+			case MELEE_PROJECTILE:
+				if (config.style().getMelee() != projectile.getId()) {
+					replaceProjectile(projectile, config.style().getMelee());
+				}
+				break;
+			case RANGE_ROCK_PROJECTILE:
+				if (config.themedRock()) {
+					replaceProjectile(projectile, config.style().getRangerock());
+				}
+				break;
+			case MAGE_ROCK_PROJECTILE:
+				if (config.themedRock()) {
+					replaceProjectile(projectile, config.style().getMagerock());
+				}
+				break;
+			default:
+				break;
 		}
 
 	}
