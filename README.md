@@ -1,2 +1,1 @@
-# Example
-An example greeter plugin
+A plugin to replace the default doom projectile assets with accessibility friendly options
