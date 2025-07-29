@@ -1,4 +1,4 @@
-package com.DoomReplacer;
+package com.DoomProjectileReplacer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,20 +6,14 @@ import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup(DoomReplacerConfig.GROUP)
-public interface DoomReplacerConfig extends Config {
+@ConfigGroup(DoomProjectileReplacerConfig.GROUP)
+public interface DoomProjectileReplacerConfig extends Config {
 
 	// Default
 	static final int DEFAULT_MELEE = 3378;
 
 	static final int ZEBAK_RANGE_PROJECTILE = 2178;
 	static final int ZEBAK_MAGE_PROJECTILE = 2176;
-
-	// Removed these for now as the range is very similar to the default melee
-	// Inferno
-	// static final int INFERNO_RANGE = 1378;
-	// static final int INFERNO_MAGE = 1380;
-	// static final int INFERNO_MELEE = DEFAULT_MELEE;
 
 	// CoX
 	static final int COX_RANGE = 1343;
@@ -41,8 +35,6 @@ public interface DoomReplacerConfig extends Config {
 	@Getter
 	@AllArgsConstructor
 	enum Style {
-		// Inferno(INFERNO_RANGE, INFERNO_MAGE, INFERNO_MELEE, ZEBAK_RANGE_PROJECTILE,
-		// ZEBAK_MAGE_PROJECTILE),
 		CoX(COX_RANGE, COX_MAGE, COX_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE),
 		ToB(TOB_RANGE, TOB_MAGE, TOB_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE),
 		ToA(TOA_RANGE, TOA_MAGE, TOA_MELEE, ZEBAK_RANGE_PROJECTILE, ZEBAK_MAGE_PROJECTILE);
@@ -59,7 +51,7 @@ public interface DoomReplacerConfig extends Config {
 		return Style.ToA;
 	}
 
-	@ConfigItem(name = "Themed Rock", keyName = "themedRock", description = "Replace boulders with Zebak alternatives", position = 2)
+	@ConfigItem(name = "Zebak Themed Rock", keyName = "themedRock", description = "Replace boulders with Zebak alternatives", position = 2)
 	default boolean themedRock() {
 		return true;
 	}

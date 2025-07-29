@@ -1,4 +1,4 @@
-package com.DoomReplacer;
+package com.DoomProjectileReplacer;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -12,9 +12,9 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 
 @Slf4j
-@PluginDescriptor(name = "Doom Replacer", description = "Alter the Projectiles for Dooms attacks for colourblind accessibility", tags = {
+@PluginDescriptor(name = "Doom Projectile Replacer", description = "Alter the Projectiles for Dooms attacks for colourblind accessibility", tags = {
 		"boss", "pvm", "doom", "osto-ayak" })
-public class DoomReplacerPlugin extends Plugin {
+public class DoomProjectileReplacerPlugin extends Plugin {
 
 	private static final int MAGIC_PROJECTILE = 3379;
 	private static final int RANGE_PROJECTILE = 3380;
@@ -27,11 +27,11 @@ public class DoomReplacerPlugin extends Plugin {
 	private Client client;
 
 	@Inject
-	private DoomReplacerConfig config;
+	private DoomProjectileReplacerConfig config;
 
 	@Provides
-	DoomReplacerConfig provideConfig(ConfigManager configManager) {
-		return configManager.getConfig(DoomReplacerConfig.class);
+	DoomProjectileReplacerConfig provideConfig(ConfigManager configManager) {
+		return configManager.getConfig(DoomProjectileReplacerConfig.class);
 	}
 
 	@Subscribe
